@@ -17,32 +17,37 @@ import lombok.Setter;
 @Setter
 public class Patients {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO, generator = "Patient_generator")
-    @OneToMany(mappedBy = "Reports")    
-    private long report_id;
+    // @Id
+    // @GeneratedValue(strategy = GenerationType.AUTO, generator = "Patient_generator")
+    // @OneToMany(mappedBy = "Reports")    
+    // private long report_id;
 
 
     //USER
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO, generator = "patient_generator")
+    private long id;
     private String first_name;
     private String last_name;
     private Date birth_date;
     private String gender;
     private String cnic;
-    private String city;
-    private String country;
+    private String address;
     private String preferred_language;
     private String occupation;
-    private String created_on; 
-    private String updated_on; 
+    private Date created; 
+    private Date updated; 
     // @ManyToOne
     // @JoinColumn(name= "report_id")
 
     //FOR PATIENT ONLY 
     private String blood_group;
-    private String marital_status;
+     private enum  marital_status{
+       Single, Married, Divorced, Widow 
+       
+    };
     private String phone_number;
     //private  isActive;  //for checking the approval of patient 
-    private String guardian_pshone_number;
+    private String guardian_phone_number;
 
 }
