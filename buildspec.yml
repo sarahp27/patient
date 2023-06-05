@@ -45,7 +45,7 @@ phases:
   post_build:
     commands:
       - echo the build is completed
-      - mvn package
+      # - mvn package
       # - command
 #reports:
   #report-name-or-arn:
