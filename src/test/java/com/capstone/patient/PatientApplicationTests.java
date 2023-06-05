@@ -127,8 +127,12 @@ class PatientApplicationTests {
 
 	@Test
 	public void canUpdateAPatient() throws Exception{
+		Patients patient1 = new Patients(1, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0233-8222111");
+
 		mvc.perform(MockMvcRequestBuilders.post("/patient/update")
-			.contentType(MediaType.APPLICATION_JSON))
+			.contentType(MediaType.APPLICATION_JSON)
+			.content(jsonPatient.write(patient1).getJson()))
 			.andExpect(MockMvcResultMatchers.status().isOk());
+			
 	}
 }
