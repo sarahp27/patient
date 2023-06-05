@@ -33,7 +33,7 @@ phases:
       java: corretto17
   pre_build:
     commands:
-      - mvn test
+      # - mvn test
   #     - apt install java-17-amazon-corretto-devel -y
   #     - alternatives --set java /usr/lib/jvm/java-17-amazon-corretto.aarch64/bin/java
   build:
@@ -45,6 +45,7 @@ phases:
   post_build:
     commands:
       - echo the build is completed
+      - mvn package
       # - command
 #reports:
   #report-name-or-arn:
