@@ -20,8 +20,8 @@ public class Patients {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private long user_id;
-    private Date created; 
-    private Date updated; 
+    private Date created;
+    private Date updated;
     private String guardian_phone_number;
 
     public Patients(long user_id, Date created, Date updated, String guardian_phone_number){
