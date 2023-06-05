@@ -126,7 +126,7 @@ class PatientApplicationTests {
 			.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
-	// Test # 4 : Update a patient
+	// Test # 5 : Update a patient
 
 	@Test
 	public void canUpdateAPatient() throws Exception{
