@@ -1,5 +1,6 @@
 package com.capstone.patient;
 
+import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.when;
 
 import java.sql.Date;
@@ -71,7 +72,7 @@ class PatientApplicationTests {
 	public void canAddPatient() throws Exception{
 		Patients patient = new Patients(1, 1, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0444-3333333");
 		
-		when(patientRepo.save(patient))
+		when(patientRepo.save(patient)).thenReturn(patient);
 
 		mvc.perform(MockMvcRequestBuilders
 		.post("/patient/add")
@@ -118,7 +119,9 @@ class PatientApplicationTests {
 
 	@Test
 	public void canDeletePatient() throws Exception {
-
+		
+		Integer id = 1;
+		doNothing().when(patientRepo).deleteById(id);
 		mvc.perform(MockMvcRequestBuilders.delete("/patient/delete/1"))
 			.andExpect(MockMvcResultMatchers.status().isOk());
 	}
@@ -128,6 +131,8 @@ class PatientApplicationTests {
 	@Test
 	public void canUpdateAPatient() throws Exception{
 		Patients patient1 = new Patients(1, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0233-8222111");
+
+		when(patientRepo.save(patient1)).thenReturn(patient1);
 
 		mvc.perform(MockMvcRequestBuilders.post("/patient/update")
 			.contentType(MediaType.APPLICATION_JSON)
