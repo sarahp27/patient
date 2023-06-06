@@ -39,15 +39,7 @@ public class PatientController {
     }
 
     @GetMapping("/list")
-    private ResponseEntity getpatient(@RequestParam Integer id) {
-        if (id != 0) {
-            Patients patient = repo.findById(id).orElse(null);
-            if(patient == null){
-                return ResponseEntity.ok().body("Patient not found");
-            }
-            return ResponseEntity.ok().body(patient);
-        }
-
+    private ResponseEntity getpatient() {
 
         List list = new ArrayList<Patients>();
             list = repo.findAll();
@@ -58,8 +50,18 @@ public class PatientController {
             return ResponseEntity.ok().body(list);
     }
 
+    @GetMapping("/{id}")
+    private ResponseEntity getPatientById(@PathVariable long id){
+        Patients patient = repo.findById(id).orElse(null);
+            if(patient == null){
+                return ResponseEntity.ok().body("Patient not found");
+            }
+            return ResponseEntity.ok().body(patient);
+    }
+
+
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity deletePatient(@PathVariable Integer id) {
+    private ResponseEntity deletePatient(@PathVariable long id) {
         Patients patient = repo.findById(id).orElse(null);
         if(patient == null){
         return ResponseEntity.ok("Patient not found");

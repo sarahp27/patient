@@ -105,11 +105,11 @@ class PatientApplicationTests {
 
 	@Test
 	public void canGetAPatient() throws Exception {
-		Patients patient1 = new Patients(1, 1, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0233-8222111");
+		Patients patient1 = new Patients(1L, 1L, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0233-8222111");
 		
-		when(patientRepo.findById(1)).thenReturn(Optional.of(patient1));
+		when(patientRepo.findById(1L)).thenReturn(Optional.of(patient1));
 
-		mvc.perform(MockMvcRequestBuilders.get("/patient/list?id=1")
+		mvc.perform(MockMvcRequestBuilders.get("/patient/1")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.content().json(jsonPatient.write(patient1).getJson()));
@@ -120,7 +120,7 @@ class PatientApplicationTests {
 	@Test
 	public void canDeletePatient() throws Exception {
 		
-		Integer id = 1;
+		long id = 1;
 		doNothing().when(patientRepo).deleteById(id);
 		mvc.perform(MockMvcRequestBuilders.delete("/patient/delete/1"))
 			.andExpect(MockMvcResultMatchers.status().isOk());

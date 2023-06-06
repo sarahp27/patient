@@ -18,7 +18,7 @@ public class Patients {
     
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Integer id;
+    private long id;
     private long user_id;
     private Date created;
     private Date updated;
