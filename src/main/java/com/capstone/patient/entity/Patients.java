@@ -1,6 +1,10 @@
 package com.capstone.patient.entity;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
+
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -20,14 +24,14 @@ public class Patients {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private long user_id;
-    private Date created;
-    private Date updated;
+    @CreationTimestamp
+    private LocalDateTime created;
+    @UpdateTimestamp
+    private LocalDateTime updated;
     private String guardian_phone_number;
 
-    public Patients(long user_id, Date created, Date updated, String guardian_phone_number){
+    public Patients(long user_id, String guardian_phone_number){
         this.user_id = user_id;
-        this.created = created;
-        this.updated = updated;
         this.guardian_phone_number = guardian_phone_number;
     }
 

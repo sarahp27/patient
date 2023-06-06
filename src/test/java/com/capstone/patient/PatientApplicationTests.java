@@ -70,7 +70,7 @@ class PatientApplicationTests {
 
 	@Test   
 	public void canAddPatient() throws Exception{
-		Patients patient = new Patients(1, 1, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0444-3333333");
+		Patients patient = new Patients( 1, "0444-3333333");
 		
 		when(patientRepo.save(patient)).thenReturn(patient);
 
@@ -85,8 +85,8 @@ class PatientApplicationTests {
 
 	@Test
 	public void canGetAllPatients() throws Exception {
-		Patients patient1 = new Patients( 1, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0233-8222111");
-		Patients patient2 = new Patients( 2, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0345-6332229");
+		Patients patient1 = new Patients( 1, "0233-8222111");
+		Patients patient2 = new Patients( 2, "0345-6332229");
 		
 		List<Patients> patientList = new ArrayList<>();
 		patientList.add(patient1);
@@ -105,7 +105,7 @@ class PatientApplicationTests {
 
 	@Test
 	public void canGetAPatient() throws Exception {
-		Patients patient1 = new Patients(1L, 1L, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0233-8222111");
+		Patients patient1 = new Patients( 1L, "0233-8222111");
 		
 		when(patientRepo.findById(1L)).thenReturn(Optional.of(patient1));
 
@@ -130,7 +130,7 @@ class PatientApplicationTests {
 
 	@Test
 	public void canUpdateAPatient() throws Exception{
-		Patients patient1 = new Patients(1, Date.valueOf(LocalDate.now()), Date.valueOf(LocalDate.now()), "0233-8222111");
+		Patients patient1 = new Patients(1, "0233-8222111");
 
 		when(patientRepo.save(patient1)).thenReturn(patient1);
 
