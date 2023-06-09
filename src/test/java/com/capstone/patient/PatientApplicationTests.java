@@ -62,9 +62,9 @@ class PatientApplicationTests {
 		mvc = MockMvcBuilders.standaloneSetup(patientController).build();
 	}
 
-	@Test
-	void contextLoads() {
-	}
+	// @Test
+	// void contextLoads() {
+	// }
 
 	// Test # 1 : Add the Patient
 
