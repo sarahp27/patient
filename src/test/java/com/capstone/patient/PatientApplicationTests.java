@@ -31,6 +31,7 @@ import org.springframework.web.context.WebApplicationContext;
 
 import com.capstone.patient.controller.PatientController;
 import com.capstone.patient.entity.Patients;
+import com.capstone.patient.entity.Response;
 import com.capstone.patient.repository.PatientRepo;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -52,8 +53,8 @@ class PatientApplicationTests {
 	@InjectMocks
 	private PatientController patientController;
 
-	private JacksonTester<Patients> jsonPatient;
-	private JacksonTester<List<Patients>> jsonPatients;
+	private JacksonTester<Response> jsonPatient;
+	private JacksonTester<Response> jsonPatients;
 
 	
 	@BeforeEach
@@ -77,7 +78,7 @@ class PatientApplicationTests {
 		mvc.perform(MockMvcRequestBuilders
 		.post("/patient/add")
 		.contentType(MediaType.APPLICATION_JSON)
-		.content(jsonPatient.write(patient).getJson()))
+		.content(jsonPatient.write(new Response(true, patient , "Patients add successfully")).getJson()))
 		.andExpect(MockMvcResultMatchers.status().isOk());
 	}
 
@@ -95,10 +96,10 @@ class PatientApplicationTests {
 		when(patientRepo.findAll()).thenReturn(patientList);
 
 		mvc.perform(MockMvcRequestBuilders
-				.get("/patient/list?id=0")
+				.get("/patient/list")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.content().json(jsonPatients.write(patientList).getJson()));
+				.andExpect(MockMvcResultMatchers.content().json(jsonPatients.write(new Response(true, patientList, "Patients fetched successfully")).getJson()));
 	}
 
 	// Test # 3 : Get a Patient by Id
@@ -112,7 +113,7 @@ class PatientApplicationTests {
 		mvc.perform(MockMvcRequestBuilders.get("/patient/1")
 				.contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.status().isOk())
-				.andExpect(MockMvcResultMatchers.content().json(jsonPatient.write(patient1).getJson()));
+				.andExpect(MockMvcResultMatchers.content().json(jsonPatient.write(new Response(true, patient1, "Patient fetched successfully")).getJson()));
 	}
 	
 	// Test # 4 : Delete a patient
@@ -136,7 +137,7 @@ class PatientApplicationTests {
 
 		mvc.perform(MockMvcRequestBuilders.post("/patient/update")
 			.contentType(MediaType.APPLICATION_JSON)
-			.content(jsonPatient.write(patient1).getJson()))
+			.content(jsonPatient.write(new Response(true, patient1 , "Patients add successfully")).getJson()))
 			.andExpect(MockMvcResultMatchers.status().isOk());
 			
 	}

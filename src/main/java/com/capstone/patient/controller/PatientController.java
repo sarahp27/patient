@@ -29,15 +29,16 @@ public class PatientController {
     }
 
     @PostMapping("/add")
-    private ResponseEntity addPatient(@RequestBody Patients data) {
+    private ResponseEntity<Response> addPatient(@RequestBody Patients data) {
         Patients patient = repo.save(data);
-        return ResponseEntity.ok().body(patient);
+        return ResponseEntity.ok().body(new Response(true, patient , "Patients add successfully"));
 
     }
 
     @PostMapping("/update")
-    private ResponseEntity updatePatient(@RequestBody Patients data) {
-        return ResponseEntity.ok().body(repo.save(data));
+    private ResponseEntity<Response> updatePatient(@RequestBody Patients data) {
+        Patients patient = repo.save(data);
+        return ResponseEntity.ok().body(new Response(true, patient , "Patients update successfully"));
     }
 
     @GetMapping("/list")
@@ -63,13 +64,13 @@ public class PatientController {
 
 
     @DeleteMapping("/delete/{id}")
-    private ResponseEntity deletePatient(@PathVariable long id) {
+    private ResponseEntity<Response> deletePatient(@PathVariable long id) {
         Patients patient = repo.findById(id).orElse(null);
         if(patient == null){
-        return ResponseEntity.ok("Patient not found");
+        return ResponseEntity.ok().body(new Response(true, "Patient not found"));
         }
         repo.deleteById(id);
-        return ResponseEntity.ok("Patient has been deleted");
+        return ResponseEntity.ok().body(new Response(true, "Patient has been deleted"));
     }
 
 }
