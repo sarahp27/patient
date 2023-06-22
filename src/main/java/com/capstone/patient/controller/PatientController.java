@@ -76,7 +76,7 @@ public class PatientController {
     @GetMapping("/getByUserId/{userId}")
         private ResponseEntity<Response> findByUserId(@PathVariable("userId") long userId) {
         Patients patient = repo.findByUserId(userId);
-            return ResponseEntity.ok().body(new Response(true, patient, "All Patients are got"));
+            return ResponseEntity.ok().body(new Response(true, patient, "Patients fetched successfully"));
 }
 
 }
