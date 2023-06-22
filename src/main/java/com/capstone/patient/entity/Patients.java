@@ -12,29 +12,27 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
+@NoArgsConstructor
 public class Patients {
-    
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    private long user_id;
+    private long userId;
     @CreationTimestamp
     private LocalDateTime created;
     @UpdateTimestamp
     private LocalDateTime updated;
-    private String guardian_phone_number;
-
-    public Patients(long user_id, String guardian_phone_number){
-        this.user_id = user_id;
-        this.guardian_phone_number = guardian_phone_number;
+    private String guardianPhoneNumber;
+    public Patients(long userId, String guardianPhoneNumber){
+        this.userId = userId;
+        this.guardianPhoneNumber = guardianPhoneNumber;
     }
-
-    public Patients(){}
-
 }

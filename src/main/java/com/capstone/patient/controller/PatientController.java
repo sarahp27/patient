@@ -73,4 +73,10 @@ public class PatientController {
         return ResponseEntity.ok().body(new Response(true, "Patient has been deleted"));
     }
 
+    @GetMapping("/getByUserId/{userId}")
+        private ResponseEntity<Response> findByUserId(@PathVariable("userId") long userId) {
+        Patients patient = repo.findByUserId(userId);
+            return ResponseEntity.ok().body(new Response(true, patient, "All Patients are got"));
+}
+
 }

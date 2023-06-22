@@ -6,4 +6,5 @@ import com.capstone.patient.entity.Patients;
 
 public interface PatientRepo extends JpaRepository<Patients, Long> {
     
+    Patients  findByUserId(long userId);
 }
