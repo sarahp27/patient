@@ -79,4 +79,23 @@ public class PatientController {
             return ResponseEntity.ok().body(new Response(true, patient, "Patients fetched successfully"));
 }
 
+
+@GetMapping("/")
+    private ResponseEntity getPatient() {
+
+        List list = new ArrayList<Patients>();
+            list = repo.findAll();
+            return ResponseEntity.ok().body(list);
+    }
+
+    @GetMapping("/get/{id}")
+    private ResponseEntity getPatientByIdForDataEngg(@PathVariable long id){
+        Patients patient = repo.findById(id).orElse(null);
+            if(patient == null){
+                return ResponseEntity.ok().body(null);
+            }
+            return ResponseEntity.ok().body(patient);
+    }
+
+
 }
