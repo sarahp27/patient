@@ -80,7 +80,7 @@ public class PatientController {
 }
 
 
-@GetMapping("/")
+@GetMapping("")
     private ResponseEntity getPatient() {
 
         List list = new ArrayList<Patients>();
